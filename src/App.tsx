@@ -37,39 +37,54 @@ const Dice = ({imageUrl}: DiceProps):JSX.Element => {
 
 function App(): JSX.Element {
 
+  const [randomBackground, setRandomBackground] = useState("#ffffff")
+
   const [diceImage, setDiceImage] = useState<ImageSourcePropType>(One)
   const rollDice = () =>{
     let randomNumber = Math.floor(Math.random() * 6) + 1;
+    const hexRange = '0123456789ABCDEF'
+    let color='#'
+    for (let i = 0; i < 6; i++) {
+     color += hexRange[Math.floor(Math.random() * 16)];
+    }
    
       switch(randomNumber){
         case 1:
           setDiceImage(One)
+          setRandomBackground(color)
           break;
         case 2:
           setDiceImage(two)
+          setRandomBackground(color)
           break;
         case 3:
           setDiceImage(three)
+          setRandomBackground(color)
           break;   
         case 4:
           setDiceImage(four)
+          setRandomBackground(color)
           break;
         case 5:
           setDiceImage(five)
+          setRandomBackground(color)
           break;
         case 6:
           setDiceImage(six)
+          setRandomBackground(color)
           break;
         default:
           setDiceImage(One)
+          setRandomBackground(color)
           break;
 
       }
       ReactNativeHapticFeedback.trigger("impactLight", options);
   }
 
+  
   return (
-   <View style={[styles.container, {}]}>
+   <View style={[styles.container, {backgroundColor:randomBackground}]}>
     
     <View style={styles.directionDice}>
       <Dice imageUrl={diceImage}/>
