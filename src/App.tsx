@@ -9,6 +9,13 @@ import {
   Pressable
 } from 'react-native';
 
+import ReactNativeHapticFeedback from "react-native-haptic-feedback";
+
+const options = {
+  enableVibrateFallback: true,
+  ignoreAndroidSystemSettings: false,
+};
+
 import One from '../assets/one.png' 
 import two from '../assets/two.png'
 import three from '../assets/three.png'
@@ -58,6 +65,7 @@ function App(): JSX.Element {
           break;
 
       }
+      ReactNativeHapticFeedback.trigger("impactLight", options);
   }
 
   return (
