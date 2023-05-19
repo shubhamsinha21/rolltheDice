@@ -30,7 +30,7 @@ type DiceProps = PropsWithChildren<{
 const Dice = ({imageUrl}: DiceProps):JSX.Element => {
   return(
     <View style ={styles.diceContainer}>
-      <Image style={styles.diceImage} source={imageUrl} /> 
+      <Image style={styles.assetImage} source={imageUrl} /> 
     </View>
   )
 }
@@ -69,8 +69,12 @@ function App(): JSX.Element {
   }
 
   return (
-   <View style={styles.container}>
+   <View style={[styles.container, {}]}>
+    
+    <View style={styles.directionDice}>
       <Dice imageUrl={diceImage}/>
+      <Dice imageUrl={diceImage}/>
+      </View>
       <Pressable onPress={rollDice}>
             <Text style={styles.rollDiceBtn}>Roll the dice</Text>
       </Pressable>
@@ -84,13 +88,15 @@ const styles = StyleSheet.create({
     flex:1,
     alignItems:'center',
     justifyContent:'center',
-    backgroundColor: '#be7bd1',
-    
+    backgroundColor: '#be7bd1'
+  },
+  directionDice:{
+    flexDirection:'row'
   },
   diceContainer:{
     margin:20
   },
-  diceImage:{
+ assetImage:{
     width:150,
     height:150,
   },
@@ -103,6 +109,7 @@ const styles = StyleSheet.create({
     borderRadius:10,
     borderColor:'#E5E0FF',
     borderWidth:2,
+
 
   }
 });
