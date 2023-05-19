@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type {PropsWithChildren} from 'react';
 import {
   ImageSourcePropType,
-  StatusBar,
   StyleSheet,
   Text,
   View,
-  Image
+  Image,
+  Pressable
 } from 'react-native';
 
 import One from '../assets/one.png' 
@@ -22,19 +22,50 @@ type DiceProps = PropsWithChildren<{
 
 const Dice = ({imageUrl}: DiceProps):JSX.Element => {
   return(
-    <View>
-      <Image style={styles.diceImages} source={imageUrl} /> 
+    <View style ={styles.diceContainer}>
+      <Image style={styles.diceImage} source={imageUrl} /> 
     </View>
   )
 }
 
 function App(): JSX.Element {
 
-  const [diceImage, setDiceImage] = (One)
+  const [diceImage, setDiceImage] = useState<ImageSourcePropType>(One)
+  const rollDice = () =>{
+    let randomNumber = Math.floor(Math.random() * 6) + 1;
+   
+      switch(randomNumber){
+        case 1:
+          setDiceImage(One)
+          break;
+        case 2:
+          setDiceImage(two)
+          break;
+        case 3:
+          setDiceImage(three)
+          break;   
+        case 4:
+          setDiceImage(four)
+          break;
+        case 5:
+          setDiceImage(five)
+          break;
+        case 6:
+          setDiceImage(six)
+          break;
+        default:
+          setDiceImage(One)
+          break;
+
+      }
+  }
 
   return (
    <View style={styles.container}>
-    <Text>Hello Image</Text>
+      <Dice imageUrl={diceImage}/>
+      <Pressable onPress={rollDice}>
+            <Text style={styles.rollDiceBtn}>Roll the dice</Text>
+      </Pressable>
    </View>
      
   );
@@ -42,11 +73,29 @@ function App(): JSX.Element {
 
 const styles = StyleSheet.create({
   container:{
-
+    flex:1,
+    alignItems:'center',
+    justifyContent:'center',
+    backgroundColor: '#FFF2F2',
+    
   },
-  diceImages:{
-    // width:200,
-    // height:200
+  diceContainer:{
+    margin:20
+  },
+  diceImage:{
+    width:150,
+    height:150,
+  },
+  rollDiceBtn:{
+    paddingVertical:10,
+    paddingHorizontal:20,
+    color:'#8EA7E9',
+    fontWeight:'700',
+    textTransform:'uppercase',
+    borderRadius:10,
+    borderColor:'#E5E0FF',
+    borderWidth:2,
+
   }
 });
 
